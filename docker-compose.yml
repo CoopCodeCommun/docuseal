@@ -1,0 +1,15 @@
+services:                           
+  docuseal:
+    container_name: docuseal
+    image: docuseal/docuseal
+    volumes:    
+      - ./data:/data
+    restart: unless-stopped
+    networks:
+      - frontend
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=frontend
+      - traefik.http.routers.docuseal.tls.certresolver=myresolver
+      - traefik.http.routers.docuseal.rule=Host(`$DOMAIN`)
+      - traefik.http.services.docuseal.loadbalancer.server.port=3000
