@@ -13,3 +13,7 @@ services:
       - traefik.http.routers.docuseal.tls.certresolver=myresolver
       - traefik.http.routers.docuseal.rule=Host(`$DOMAIN`)
       - traefik.http.services.docuseal.loadbalancer.server.port=3000
+
+networks:
+  frontend:
+    external: true
